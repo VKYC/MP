@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_token_config_manager,access.token.config.manager,model_token_config,account.group_account_manager,1,1,1,1
-access_account_token_manager,access.account.token.manager,model_account_token,account.group_account_manager,1,1,1,1
