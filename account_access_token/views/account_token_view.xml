@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="task_field_edit_tree">
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2" />
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="before">
+                <field name="payment_state" />
+            </field>
+        </field>
+    </record>
+    <record id="task_field_edit" model="ir.ui.view">
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field name="arch" type="xml">
+            <header position="inside">
+                <field name="payment_state" widget="statusbar" options="{'clickable': 1}"/>
+            </header>
+        </field>
+    </record>
+    <record id="account_token_view_tree" model="ir.ui.view">
+        <field name="name">account.move.view.tree.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="example_char"
+                />
+                <!-- attrs="{'invisible' : [('product_tmpl_id', '=', False)]}" -->
+            </xpath>
+        </field>
+    </record>
+</odoo>
