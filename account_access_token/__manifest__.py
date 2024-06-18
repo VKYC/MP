@@ -13,9 +13,6 @@
     'data': [
         'security/ir.model.access.csv',
         'views/token_config_views.xml',
-        'views/token_views.xml',
-        'views/account_views_inherited.xml',
-        'views/token_wizard_views.xml',
     ],
     'demo': [
 
