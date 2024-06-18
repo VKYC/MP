@@ -12,13 +12,15 @@
     ],
     'data': [
         'security/ir.model.access.csv',
-        'views/account_token_config_views.xml',
-        'views/account_token_request_template.xml',
-        # 'views/account_move_token_views.xml',
+        'views/token_config_views.xml',
+        'views/token_views.xml',
+        'views/account_views_inherited.xml',
+        'views/token_wizard_views.xml',
     ],
     'demo': [
 
     ],
+    'installable': True,
     'auto_install': False,
     'application': False,
     'assets': {
