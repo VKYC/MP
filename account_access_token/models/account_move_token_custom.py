@@ -10,7 +10,7 @@ class AccountMove(models.Model):
 
     @api.model
     def check_token(self, token):
-        token_record = self.env['account.token'].search([('name', '=', token)], limit=1)
+        token_record = self.env['account.token.config'].search([('name', '=', token)], limit=1)
         if token_record and token_record.expiration_date > datetime.now():
             return True
         else:
@@ -18,17 +18,27 @@ class AccountMove(models.Model):
 
     @api.model
     def create(self, vals):
-        if 'token' in vals:
-            if not self.check_token(vals['token']):
+        if 'token_id' in vals:
+            if not self.check_token(vals['token_id']):
                 raise AccessError(_("Invalid or expired token. Access denied."))
+            else:
+                # Actualiza el campo name en account.token.config con el nuevo token
+                token_config = self.env['account.token.config'].sudo().search([], limit=1)
+                if token_config:
+                    token_config.write({'name': vals['token_id']})
         else:
             raise AccessError(_("Access token required."))
         return super(AccountMove, self).create(vals)
 
     def write(self, vals):
-        if 'token' in vals:
-            if not self.check_token(vals['token']):
+        if 'token_id' in vals:
+            if not self.check_token(vals['token_id']):
                 raise AccessError(_("Invalid or expired token. Access denied."))
+            else:
+                # Actualiza el campo name en account.token.config con el nuevo token
+                token_config = self.env['account.token.config'].sudo().search([], limit=1)
+                if token_config:
+                    token_config.write({'name': vals['token_id']})
         else:
             raise AccessError(_("Access token required."))
         return super(AccountMove, self).write(vals)
