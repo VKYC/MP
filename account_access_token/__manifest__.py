@@ -11,10 +11,10 @@
         'analytic', 'product', 'account'
     ],
     'data': [
-        # 'views/account_token_view.xml',
         'security/ir.model.access.csv',
-        'views/token_config_views.xml',
-        'views/token_request_template.xml',
+        'views/account_token_config_views.xml',
+        'views/account_token_request_template.xml',
+        # 'views/account_move_token_views.xml',
     ],
     'demo': [
 
