@@ -8,7 +8,7 @@ class TokenConfig(models.Model):
     _name = 'token.config'
     _description = 'Configuración de Token'
 
-    token_size = fields.Integer(string='Tamaño del Token', default=6)
+    token_size = fields.Integer(string='Tamaño del Token', default=18)
     token_duration = fields.Integer(string='Días de Duración', default=7)
     token = fields.Char(string='Token generado', compute='_compute_token', store=True, readonly=True)
     token_start_date = fields.Date(string='Fecha de inicio de validez', store=True, readonly=True)
