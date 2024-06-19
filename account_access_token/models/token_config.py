@@ -56,5 +56,5 @@ class TokenConfig(models.Model):
 
     def _generate_token(self, size):
         """Genera un token aleatorio de tamaño especificado."""
-        chars = string.ascii_uppercase + string.digits
+        chars = string.ascii_uppercase + string.digits + string.ascii_lowercase
         return ''.join(random.choice(chars) for _ in range(size))
