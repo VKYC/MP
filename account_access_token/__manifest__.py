@@ -13,6 +13,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/token_config_views.xml',
+        'wizard/token_request_wizard.xml',
     ],
     'demo': [
 
