@@ -8,7 +8,7 @@
     'license': 'LGPL-3',
     'category': 'account',
     'depends': [
-        'analytic', 'product', 'account'
+        'analytic', 'product', 'account', 'hr' , 'mail',
     ],
     'data': [
         'security/ir.model.access.csv',
