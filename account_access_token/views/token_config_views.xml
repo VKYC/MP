@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="view_token_config_form" model="ir.ui.view">
+        <field name="name">token.config.form</field>
+        <field name="model">token.config</field>
+        <field name="arch" type="xml">
+            <form string="Configuración de Token">
+                <group>
+                    <field name="token"/>
+                    <field name="token_size"/>
+                    <field name="token_duration"/>
+                    <field name="token_start_date"/>
+                    <field name="token_end_date"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_token_config_tree" model="ir.ui.view">
+        <field name="name">token.config.tree</field>
+        <field name="model">token.config</field>
+        <field name="arch" type="xml">
+            <tree string="Configuración de Token">
+                <field name="token"/>
+                <field name="token_size"/>
+                <field name="token_duration"/>
+                <field name="token_start_date"/>
+                <field name="token_end_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_token_config" model="ir.actions.act_window">
+        <field name="name">Configuración de Token</field>
+        <field name="res_model">token.config</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_token_config" name="Configuración de Token"
+                parent="account.account_account_menu"
+                action="action_token_config"/>
+</odoo>
