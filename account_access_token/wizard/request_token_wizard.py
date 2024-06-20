@@ -6,7 +6,7 @@ class RequestTokenWizard(models.TransientModel):
     _description = "Request token wizard"
 
     token = fields.Char(string='Token', required=True)
-    
+
     def confirm_action_journal(self):
         token_config = self.env['token.config'].search([
             ('token', '=', self.token),
