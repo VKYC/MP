@@ -37,14 +37,14 @@
     </record>
 
     <record id="request_token_journal_line_wizard" model="ir.actions.act_window">
-        <field name="name">intruducir token</field>
+        <field name="name">intruducir token contable</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">request.token.wizard</field>
         <field name="view_id" ref="token_request_journal_line_form_view"/>
         <field name="target">new</field>
     </record>
     <record id="request_token_account_moves_all_wizard" model="ir.actions.act_window">
-        <field name="name">intruducir token</field>
+        <field name="name">intruducir token contable</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">request.token.wizard</field>
         <field name="view_id" ref="token_request_account_moves_all_form_view"/>
