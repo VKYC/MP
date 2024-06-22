@@ -2,7 +2,7 @@
 <odoo>
     <data noupdate="1">
         <record id="account_token_access_security" model="ir.module.category">
-            <field name="name">Account Token Manager</field>
+            <field name="name">Account Token Security</field>
             <field name="description">Access rights for Account Token Manager</field>
             <field name="sequence">10</field>
         </record>
