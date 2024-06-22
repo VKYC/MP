@@ -11,6 +11,7 @@
         'analytic', 'product', 'account', 'hr' , 'mail',
     ],
     'data': [
+        'security/account_access_token_security.xml',
         'security/ir.model.access.csv',
         'views/token_config_views.xml',
         'wizard/token_request_wizard.xml',
