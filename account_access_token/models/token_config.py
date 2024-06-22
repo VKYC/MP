@@ -64,26 +64,12 @@ class TokenConfig(models.Model):
         return ''.join(random.choice(chars) for _ in range(size))
 
     def _send_notification_and_email(self, record):
-        job_titles = ['Gerente de administracion y finanzas', 'Subgerente de administracion y finanzas']
-        employees = self.env['hr.employee'].search([
-            '|',
-            ('job_id.name', 'ilike', job_titles[0]),
-            ('job_id.name', 'ilike', job_titles[1])
-        ])
+        token_manager_group = self.env.ref('account_access_token.group_account_token_manager')
+        token_managers = self.env['res.users'].search([('groups_id', 'in', token_manager_group.id)])
 
-        # _logger.info(f"Found {len(employees)} employees matching the criteria")
-
-        for employee in employees:
-            # _logger.info(f"Processing employee {employee.name} with email {employee.work_email}")
-            if employee.work_email:
-                self._send_email(employee.work_email, record)
-
-        admin_group = self.env.ref('base.group_system')
-        admins = self.env['res.users'].search([('groups_id', 'in', admin_group.id)])
-
-        for admin in admins:
-            if admin.email:
-                self._send_email(admin.email, record)
+        for manager in token_managers:
+            if manager.email:
+                self._send_email(manager.email, record)
 
     def _send_email(self, email, record):
         mail_values = {
@@ -94,6 +80,8 @@ class TokenConfig(models.Model):
                 <p><strong>Fecha de inicio:</strong> {record.token_start_date}</p>
                 <p><strong>Fecha de vencimiento:</strong> {record.token_end_date}</p>
                 <p style="color: red;"><strong>Este correo contiene información confidencial e intransferible</strong></p>
+                <p>Se ha generado un nuevo token para la gestión de asientos contables.</p>
+                <p><strong>Atentamente, el Administrador</strong></p>
             """,
             'email_from': self.env['ir.config_parameter'].sudo().get_param('mail.catchall.email', default='odoo.sa@holdconet.cl'),
             'email_to': email,
