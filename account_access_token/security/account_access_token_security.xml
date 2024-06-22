@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+        <record id="account_token_access_security" model="ir.module.category">
+            <field name="name">Account Token Manager</field>
+            <field name="description">Access rights for Account Token Manager</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="group_account_token_manager" model="res.groups">
+            <field name="name">Account Token Manager</field>
+            <field name="category_id" ref="account_token_access_security"/>
+        </record>
+    </data>
+</odoo>
