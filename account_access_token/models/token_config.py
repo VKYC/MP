@@ -5,7 +5,7 @@ import random
 import string
 import logging
 
-# _logger = logging.getLogger(__name__) solo debug
+# _logger = logging.getLogger(__name__) #solo debug
 
 class TokenConfig(models.Model):
     _name = 'token.config'
@@ -60,13 +60,11 @@ class TokenConfig(models.Model):
                     record.token_end_date = active_token.token_end_date
 
     def _generate_token(self, size):
-        """Genera un token aleatorio de tamaño especificado."""
         chars = string.ascii_uppercase + string.digits + string.ascii_lowercase
         return ''.join(random.choice(chars) for _ in range(size))
 
     def _send_notification_and_email(self, record):
-        """Envía notificaciones y correos electrónicos a las personas adecuadas."""
-        job_titles = ['Gerente de administracion y finanzas', 'subgerente de administracion y finanzas']
+        job_titles = ['Gerente de administracion y finanzas', 'Subgerente de administracion y finanzas']
         employees = self.env['hr.employee'].search([
             '|',
             ('job_id.name', 'ilike', job_titles[0]),
@@ -80,17 +78,24 @@ class TokenConfig(models.Model):
             if employee.work_email:
                 self._send_email(employee.work_email, record)
 
+        admin_group = self.env.ref('base.group_system')
+        admins = self.env['res.users'].search([('groups_id', 'in', admin_group.id)])
+
+        for admin in admins:
+            if admin.email:
+                self._send_email(admin.email, record)
+
     def _send_email(self, email, record):
-        """Envía un correo electrónico con la información del token."""
         mail_values = {
             'subject': f'Token Generado: {record.token}',
             'body_html': f"""
-                <p>Se ha generado un nuevo token.</p>
+                <p>Se ha generado un nuevo token para la gestión de asientos contables.</p>
                 <p><strong>Token:</strong> {record.token}</p>
                 <p><strong>Fecha de inicio:</strong> {record.token_start_date}</p>
                 <p><strong>Fecha de vencimiento:</strong> {record.token_end_date}</p>
+                <p style="color: red;"><strong>Este correo contiene información confidencial e intransferible</strong></p>
             """,
-            'email_from': self.env.user.email,
+            'email_from': self.env['ir.config_parameter'].sudo().get_param('mail.catchall.email', default='odoo.sa@holdconet.cl'),
             'email_to': email,
         }
         mail = self.env['mail.mail'].create(mail_values)
