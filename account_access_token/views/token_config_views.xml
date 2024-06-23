@@ -38,5 +38,6 @@
 
     <menuitem id="menu_token_config" name="Configuración de Token"
                 parent="account.account_account_menu"
-                action="action_token_config"/>
+                action="action_token_config"
+                groups="account_access_token.group_account_token_manager"/>
 </odoo>
