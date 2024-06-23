@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_token_config,access.token.config,model_token_config,account.group_account_manager,1,0,0,0
 access_token_config,access.token.config,model_token_config,account_access_token.group_account_token_manager,1,1,1,1
+access_token_request,access.token.request,model_request_token_wizard,account.group_account_manager,1,1,1,0
 access_token_request,access.token.request,model_request_token_wizard,account_access_token.group_account_token_manager,1,1,1,1

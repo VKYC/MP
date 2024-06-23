@@ -11,5 +11,25 @@
             <field name="name">Account Token Manager</field>
             <field name="category_id" ref="account_token_access_security"/>
         </record>
+
+        <record id="model_request_token_wizard_access" model="ir.model.access">
+            <field name="name">Access rights for Request Token Wizard</field>
+            <field name="model_id" ref="model_request_token_wizard"/>
+            <field name="group_id" ref="account.group_account_manager"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+        <record id="model_token_config_access" model="ir.model.access">
+            <field name="name">Access rights for Token Config</field>
+            <field name="model_id" ref="model_token_config"/>
+            <field name="group_id" ref="account.group_account_manager"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
     </data>
 </odoo>
