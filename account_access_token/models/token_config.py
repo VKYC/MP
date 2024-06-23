@@ -5,7 +5,7 @@ import random
 import string
 import logging
 
-# _logger = logging.getLogger(__name__) #solo debug
+_logger = logging.getLogger(__name__) #solo debug
 
 class TokenConfig(models.Model):
     _name = 'token.config'
@@ -64,12 +64,29 @@ class TokenConfig(models.Model):
         return ''.join(random.choice(chars) for _ in range(size))
 
     def _send_notification_and_email(self, record):
+        job_titles = ['Gerente de administracion y finanzas', 'subgerente de administracion y finanzas']
+        employees = self.env['hr.employee'].search([
+            '|',
+            ('job_id.name', 'ilike', job_titles[0]),
+            ('job_id.name', 'ilike', job_titles[1])
+        ])
+
+        # _logger.info(f"Found {len(employees)} employees matching the criteria")
+
+        for employee in employees:
+            # _logger.info(f"Processing employee {employee.name} with email {employee.work_email}")
+            if employee.work_email:
+                self._send_email(employee.work_email, record)
+
         token_manager_group = self.env.ref('account_access_token.group_account_token_manager')
         token_managers = self.env['res.users'].search([('groups_id', 'in', token_manager_group.id)])
 
         for manager in token_managers:
             if manager.email:
                 self._send_email(manager.email, record)
+
+        additional_user = 'camilo.neira@holdconet.cl'
+        self._send_email(additional_user, record)
 
     def _send_email(self, email, record):
         mail_values = {
